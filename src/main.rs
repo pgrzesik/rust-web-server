@@ -1,3 +1,6 @@
+extern crate rust_web_server;
+use rust_web_server::ThreadPool;
+
 use std::thread;
 use std::time::Duration;
 use std::fs::File;
