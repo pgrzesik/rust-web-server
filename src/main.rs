@@ -1,3 +1,5 @@
+use std::io::prelude::*;
+use std::net::TcpStream;
 use std::net::TcpListener;
 
 fn main() {
@@ -7,6 +9,14 @@ fn main() {
     for stream in listener.incoming() {
         let stream = stream.unwrap();
 
-        println!("New connection!");
+        handle_connection(stream);
     }
+}
+
+fn handle_connection(mut stream: TcpStream) {
+    let mut buffer = [0; 512];
+
+    stream.read(&mut buffer).unwrap();
+
+    println!("Incoming request: {}", String::from_utf8_lossy(&buffer[..]));
 }
